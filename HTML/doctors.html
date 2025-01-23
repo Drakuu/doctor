@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../src/output.css">
+  
+  
+  <!-- Include Font Awesome Pro for access to 'thin' and 'regular' styles -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+ 
+
+
+    <title>Doctris | Doctor</title>
+    <style>
+      .card-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+      }
+    </style>
+</head>
+<body class="font-sans">
+     <!-- Navbar -->
+  <nav class=" shadow-lg p-2 md:p-4 flex justify-between items-center">
+    <!-- Left Section -->
+    <div class="flex items-center space-x-2">
+      <!-- Parent div with relative positioning for the dropdown -->
+      <div class="relative">
+        <!-- Button to toggle the menu -->
+        <button aria-label="Open menu" onclick="toggleMenu('menuOptions')"
+          class="text-blue-500 border border-blue-100 text-sm md:text-xl bg-blue-50 rounded-full py-2 px-3">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <!-- Hamburger Menu Dropdown -->
+        <div id="menuOptions"
+          class="w-48 text-center border border-gray-200  absolute bg-white rounded-md hidden z-10 top-12 left-0 mt-2">
+          <ul>
+            <!-- Page 1 with anchor link -->
+            <li class="p-1">
+              <a href="doctors.html"
+                class="text-blue-500 border-b border-gray-400 px-3 py-1.5 rounded-md block">Doctor profile</a>
+            </li>
+            <!-- Option 2 with similar styling -->
+            <li class="p-1">
+              <a href="patient_list.html" class="text-blue-500 border-b border-gray-400 px-3 py-1.5 rounded-md block">Patient list</a>
+              </a>
+            </li>
+            <!-- Option 3 with similar styling -->
+            
+             <li class="p-1">
+              <a href="appointment.html" class="text-blue-500 border-b border-gray-400 px-3 py-1.5 rounded-md block">Appointments
+              </a>
+            </li>
+            <li class="p-1">
+              <a href="Index.html" class="text-blue-500 border-b border-gray-400 px-3 py-1.5 rounded-md block">Dashboard
+              </a>
+            </li>
+          </ul>
+        </div>
+
+
+      </div>
+
+      <!-- Search Bar -->
+      <div class="flex items-center border-2 border-gray-300 rounded-full px-2 py-1.5 md:px-4 md:py-2">
+        <input type="text" placeholder="Search Keywords..." class="bg-transparent focus:outline-none text-sm">
+        <i class="fas fa-search text-gray-500"></i>
+      </div>
+    </div>
+
+
+    <!-- Right Section -->
+    <div class="flex items-center space-x-2">
+      <!-- Language Selector -->
+      <div class="hidden md:block relative">
+        <button aria-label="Select Language" onclick="toggleMenu('languageMenu')"
+          class="text-blue-500 border border-blue-100 text-xl bg-blue-50 rounded-full py-2 px-3">
+          <i class="fas fa-globe"></i>
+        </button>
+        <!-- Language Dropdown -->
+        <div id="languageMenu" class="absolute bg-white shadow-md rounded-md p-4 mt-2 hidden">
+          <ul>
+            <li class="p-2 hover:bg-gray-100 cursor-pointer">English</li>
+            <li class="p-2 hover:bg-gray-100 cursor-pointer">Spanish</li>
+            <li class="p-2 hover:bg-gray-100 cursor-pointer">French</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Settings Icon -->
+      <div class="hidden md:block relative">
+        <button aria-label="Open Settings" onclick="toggleMenu('settingsMenu')"
+          class="text-blue-500 border border-blue-100 text-xl bg-blue-50 rounded-full py-2 px-3">
+          <i class="fa-solid fa-gear"></i>
+        </button>
+        <!-- Settings Dropdown -->
+        <div id="settingsMenu" class="absolute bg-white shadow-md rounded-md p-4 mt-2 hidden">
+          <ul>
+            <li class="p-2 hover:bg-gray-100 cursor-pointer">Option 1</li>
+            <li class="p-2 hover:bg-gray-100 cursor-pointer">Option 2</li>
+            <li class="p-2 hover:bg-gray-100 cursor-pointer">Option 3</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Message Icon -->
+      <div class="hidden md:block relative">
+        <button aria-label="View Messages"
+          class="text-blue-500 border border-blue-100 text-xl bg-blue-50 rounded-full py-2 px-3 relative">
+          <i class="fa-regular fa-envelope"></i>
+          <!-- Message Notification -->
+          <span class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full px-1">1</span>
+        </button>
+      </div>
+
+      <!-- Doctor Image -->
+      <div class="text-blue-500 border border-blue-100 bg-blue-50 rounded-full">
+        <img src="../Assets/jonny.png" alt="Doctor Profile Picture" class="w-8 md:w-11 h-8 md:h-11 rounded-full">
+      </div>
+    </div>
+  </nav>
+  
+   <!-- Header -->
+   <header class="pl-2 lg:pl-10 py-9 pr-2 bg-gray-100">
+    <div class="flex justify-between mb-2">
+      <h1 class="text-xl pb-2 font-bold text-gray-700">Doctors</h1>
+      <button 
+      id="addDoctorBtn" 
+      class="text-white py-2 px-4 rounded-md bg-blue-500 hover:bg-blue-600">
+      Add New Doctor
+    </button>
+    
+    
+    </div>
+    
+    <!-- Card Container (Grid layout for responsiveness) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8" id="doctorCards">
+      <!-- Cards will be dynamically added here -->
+    </div>
+  </header>
+  
+
+    <script src="../JS/doctor.js"></script>
+</body>
+</html>

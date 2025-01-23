@@ -1,0 +1,873 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../src/output.css">
+  <!-- Include Font Awesome Pro for access to 'thin' and 'regular' styles -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+ 
+  <title>Doctris | Patients List</title>
+  <style>
+    th, td{
+        padding-bottom: 15px;
+        padding-top: 15px;
+        padding-left: 10px;
+    }
+    tr{
+        border: 1px solid rgb(238, 238, 238);
+        padding-top: 20px;
+    }
+    
+    @media (max-width: 450px){
+        #maininfo{
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .fa-eye , .fa-pen , .fa-trash {
+        font-size: 8px;
+        padding: 6px;
+    }
+    }
+    @media (max-width:970px){
+        .fa-eye , .fa-pen , .fa-trash {
+        font-size: 12px;
+        padding: 8px;
+    }
+    }
+</style>
+</head>
+
+<body class="font-sans">
+  <!-- Navbar -->
+  <nav class="bg-white shadow-lg p-2 md:p-4 flex justify-between items-center">
+    <!-- Left Section -->
+    <div class="flex items-center space-x-2">
+      <!-- Parent div with relative positioning for the dropdown -->
+      <div class="relative">
+        <!-- Button to toggle the menu -->
+        <button aria-label="Open menu" onclick="toggleMenu('menuOptions')"
+          class="text-blue-500 border border-blue-100 text-sm md:text-xl bg-blue-50 rounded-full py-2 px-3">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <!-- Hamburger Menu Dropdown -->
+        <div id="menuOptions"
+          class="w-48 text-center border border-gray-200  absolute bg-white rounded-md hidden z-10 top-12 left-0 mt-2">
+          <ul>
+            <!-- Page 1 with anchor link -->
+            <li class="p-1">
+              <a href="doctors.html" class="text-blue-500 border-b border-gray-400 px-3 py-1.5 rounded-md block">Doctor
+                profile</a>
+            </li>
+            <!-- Option 2 with similar styling -->
+            <li class="p-1">
+              <a href="patient_list.html"
+                class="text-blue-500 border-b border-gray-400 px-3 py-1.5 rounded-md block">Patient list</a>
+              </a>
+            </li>
+             <!-- Option 3 with similar styling -->
+             <li class="p-1">
+              <a href="appointment.html" class="text-blue-500 border-b border-gray-400 px-3 py-1.5 rounded-md block">Appointments
+              </a>
+            </li>
+            <li class="p-1">
+              <a href="Index.html" class="text-blue-500 border-b border-gray-400 px-3 py-1.5 rounded-md block">Dashboard
+              </a>
+            </li>
+          </ul>
+        </div>
+
+
+      </div>
+
+      <!-- Search Bar -->
+      <div class="flex items-center border-2 border-gray-300 rounded-full px-2 py-1.5 md:px-4 md:py-2">
+        <input type="text" placeholder="Search Keywords..." class="bg-transparent focus:outline-none text-sm">
+        <i class="fas fa-search text-gray-500"></i>
+      </div>
+    </div>
+
+
+    <!-- Right Section -->
+    <div class="flex items-center space-x-2">
+      <!-- Language Selector -->
+      <div class="hidden md:block relative">
+        <button aria-label="Select Language" onclick="toggleMenu('languageMenu')"
+          class="text-blue-500 border border-blue-100 text-xl bg-blue-50 rounded-full py-2 px-3">
+          <i class="fas fa-globe"></i>
+        </button>
+        <!-- Language Dropdown -->
+        <div id="languageMenu" class="absolute bg-white shadow-md rounded-md p-4 mt-2 hidden">
+          <ul>
+            <li class="p-2 hover:bg-gray-100 cursor-pointer">English</li>
+            <li class="p-2 hover:bg-gray-100 cursor-pointer">Spanish</li>
+            <li class="p-2 hover:bg-gray-100 cursor-pointer">French</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Settings Icon -->
+      <div class="hidden md:block relative">
+        <button aria-label="Open Settings" onclick="toggleMenu('settingsMenu')"
+          class="text-blue-500 border border-blue-100 text-xl bg-blue-50 rounded-full py-2 px-3">
+          <i class="fa-solid fa-gear"></i>
+        </button>
+        <!-- Settings Dropdown -->
+        <div id="settingsMenu" class="absolute bg-white shadow-md rounded-md p-4 mt-2 hidden">
+          <ul>
+            <li class="p-2 hover:bg-gray-100 cursor-pointer">Option 1</li>
+            <li class="p-2 hover:bg-gray-100 cursor-pointer">Option 2</li>
+            <li class="p-2 hover:bg-gray-100 cursor-pointer">Option 3</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Message Icon -->
+      <div class="hidden md:block relative">
+        <button aria-label="View Messages"
+          class="text-blue-500 border border-blue-100 text-xl bg-blue-50 rounded-full py-2 px-3 relative">
+          <i class="fa-regular fa-envelope"></i>
+          <!-- Message Notification -->
+          <span class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full px-1">1</span>
+        </button>
+      </div>
+
+      <!-- Doctor Image -->
+      <div class="text-blue-500 border border-blue-100 bg-blue-50 rounded-full">
+        <img src="../Assets/jonny.png" alt="Doctor Profile Picture" class="w-8 md:w-11 h-8 md:h-11 rounded-full">
+      </div>
+    </div>
+  </nav>
+  <header class="pl-2 lg:pl-10 py-9 pr-2 bg-gray-100">
+    <div class="flex justify-between">
+      <h1 class="text-xl pb-2 font-bold text-gray-700 ">Patients List</h1>
+      <div class="flex items-center space-x-2">
+        <button class="bg-blue-500 text-white text-sm lg:text-base py-2 px-4 rounded-full">
+          Add New Patient
+        </button>
+      </div>
+    </div>
+    <div id="maindiv" class="w-full">
+        
+      <div id="maininfo" class="text-gray-700 xl:mx-7 lg:mx-5 mx-3 mt-4">
+          
+          <div id="Patinfo">
+              <table class="w-full border drop-shadow-[0_5px_5px_rgba(0,0,0,0.2)] bg-white gap-4 ">
+                  <thead class="">
+                      <tr class="text-left w-full">
+                          <th class="font-bold hidden min-[720px]:table-cell">Id</th>
+                          <th class="font-bold">Name</th>
+                          <th class="font-bold hidden lg:table-cell">Age</th>
+                          <th class="font-bold hidden lg:table-cell">Gender</th>
+                          <th class="font-bold hidden min-[850px]:table-cell">Address</th>
+                          <th class="font-bold hidden min-[670px]:table-cell">Mobile No.</th>
+                          <th class="font-bold hidden min-[540px]:table-cell">Department</th>
+                          <th class="font-bold hidden xl:table-cell">Date</th>
+                          <th class="font-bold hidden xl:table-cell">Time</th>
+                          <th class="font-bold hidden min-[487px]:table-cell">Status</th>
+                          <th class="font-bold"></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr id="1st">
+                          <td id="1" class="hidden min-[720px]:table-cell">1</td>
+                          <td class="flex items-center"><img src="../Assets/client/01.jpg" alt="" class="w-10 h-10 rounded-full"><span class="ps-2">Howard Tanner</span></td>
+                          <td class="hidden lg:table-cell">25</td>
+                          <td class="hidden lg:table-cell">Male</td>
+                          <td class="hidden min-[850px]:table-cell">1451-ABC Street, NY</td>
+                          <td class="hidden min-[670px]:table-cell">123-456-7890</td>
+                          <td class="hidden min-[540px]:table-cell">Cardiology</td>
+                          <td class="hidden xl:table-cell">13th Sep 2023</td>
+                          <td class="hidden xl:table-cell">11:00AM</td>
+                          <td><span class="bg-[#ECFAF5] px-3 py-1 rounded-lg text-green-700 hidden min-[487px]:table-cell">Approved</span></td>
+                          <td>
+                              <i id="eye1" class="fa-solid fa-eye p-3 rounded-full bg-[#D4DFFB] text-blue-500 hover:bg-blue-500 hover:text-white" ></i>
+                              <i class="fa-solid fa-pen p-3 rounded-full bg-[#DDF4EB] text-green-500 hover:bg-green-500 hover:text-white"></i>
+                              <i class="fa-solid fa-trash p-3 rounded-full bg-[#FCE0DA] text-orange-500 hover:bg-orange-500 hover:text-white"></i>
+                          </td>
+                      </tr>
+                      <tr id="2nd">
+                          <td id="2" class="hidden min-[720px]:table-cell">2</td>
+                          <td class="flex items-center"><img src="../Assets/client/02.jpg" alt="" class="w-10 h-10 rounded-full"><span class="ps-2">Wendy Filson</span></td>
+                          <td class="hidden lg:table-cell">28</td>
+                          <td class="hidden lg:table-cell">Female</td>
+                          <td class="hidden min-[850px]:table-cell">1451-ABC Street, NY</td>
+                          <td class="hidden min-[670px]:table-cell">123-456-7890</td>
+                          <td class="hidden min-[540px]:table-cell">gynecology</td>
+                          <td class="hidden xl:table-cell">29th Nov 2023</td>
+                          <td class="hidden xl:table-cell">11:00AM</td>
+                          <td><span class="bg-[#FEF6F0] px-3 py-1 rounded-lg text-[#d4a674] hidden min-[487px]:table-cell">Pending</span></td>
+                          <td>
+                              <i id="eye2" class="fa-solid fa-eye p-3 rounded-full bg-[#D4DFFB] text-blue-500 hover:bg-blue-500 hover:text-white" ></i>
+                              <i class="fa-solid fa-pen p-3 rounded-full bg-[#DDF4EB] text-green-500 hover:bg-green-500 hover:text-white"></i>
+                              <i class="fa-solid fa-trash p-3 rounded-full bg-[#FCE0DA] text-orange-500 hover:bg-orange-500 hover:text-white"></i>
+                          </td>
+                      </tr>
+                      <tr id="3rd">
+                          <td id="3" class="hidden min-[720px]:table-cell">3</td>
+                          <td class="flex items-center"><img src="../Assets/client/03.jpg" alt="" class="w-10 h-10 rounded-full"><span class="ps-2">Faye Bridger</span></td>
+                          <td class="hidden lg:table-cell">28</td>
+                          <td class="hidden lg:table-cell">Female</td>
+                          <td class="hidden min-[850px]:table-cell">1451-ABC Street, NY</td>
+                          <td class="hidden min-[670px]:table-cell">123-456-7890</td>
+                          <td class="hidden min-[540px]:table-cell">Psychotherapy</td>
+                          <td class="hidden xl:table-cell">29th Dec 2023</td>
+                          <td class="hidden xl:table-cell">3:00PM</td>
+                          <td><span class="bg-[#ECFAF5] px-3 py-1 rounded-lg text-green-700  hidden min-[487px]:table-cell">Approved</span></td>
+                          <td>
+                              <i id="eye3" class="fa-solid fa-eye p-3 rounded-full bg-[#D4DFFB] text-blue-500 hover:bg-blue-500 hover:text-white" ></i>
+                              <i class="fa-solid fa-pen p-3 rounded-full bg-[#DDF4EB] text-green-500 hover:bg-green-500 hover:text-white"></i>
+                              <i class="fa-solid fa-trash p-3 rounded-full bg-[#FCE0DA] text-orange-500 hover:bg-orange-500 hover:text-white"></i>
+                          </td>
+                      </tr>
+                      <tr id="4rth">
+                          <td id="4" class="hidden min-[720px]:table-cell">4</td>
+                          <td class="flex items-center"><img src="../Assets/client/04.jpg" alt="" class="w-10 h-10 rounded-full"><span class="ps-2">Ronald Curtis</span></td>
+                          <td class="hidden lg:table-cell">25</td>
+                          <td class="hidden lg:table-cell">Male</td>
+                          <td class="hidden min-[850px]:table-cell">1451-ABC Street, NY</td>
+                          <td class="hidden min-[670px]:table-cell">123-456-7890</td>
+                          <td class="hidden min-[540px]:table-cell">Orthopedic</td>
+                          <td class="hidden xl:table-cell">13th March 2023</td>
+                          <td class="hidden xl:table-cell">1:00PM</td>
+                          <td><span class="bg-[#ECFAF5] px-3 py-1 rounded-lg text-green-700 hidden min-[487px]:table-cell">Approved</span></td>
+                          <td>
+                              <i id="eye4" class="fa-solid fa-eye p-3 rounded-full bg-[#D4DFFB] text-blue-500 hover:bg-blue-500 hover:text-white" ></i>
+                              <i class="fa-solid fa-pen p-3 rounded-full bg-[#DDF4EB] text-green-500 hover:bg-green-500 hover:text-white"></i>
+                              <i class="fa-solid fa-trash p-3 rounded-full bg-[#FCE0DA] text-orange-500 hover:bg-orange-500 hover:text-white"></i>
+                          </td>
+                      </tr>
+                      <tr id="5th">
+                          <td id="5" class="hidden min-[720px]:table-cell">5</td>
+                          <td class="flex items-center"><img src="../Assets/client/05.jpg" alt="" class="w-10 h-10 rounded-full"><span class="ps-2">Melissa Hibner</span></td>
+                          <td class="hidden lg:table-cell">28</td>
+                          <td class="hidden lg:table-cell">Female</td>
+                          <td class="hidden min-[850px]:table-cell">1451-ABC Street, NY</td>
+                          <td class="hidden min-[670px]:table-cell">123-456-7890</td>
+                          <td class="hidden min-[540px]:table-cell">Dental</td>
+                          <td class="hidden xl:table-cell">5th May 2023</td>
+                          <td class="hidden xl:table-cell">10:00PM</td>
+                          <td><span class="bg-[#FEF6F0] px-3 py-1 rounded-lg text-[#d4a674] hidden min-[487px]:table-cell">Pending</span></td>
+                          <td>
+                              <i id="eye5" class="fa-solid fa-eye p-3 rounded-full bg-[#D4DFFB] text-blue-500 hover:bg-blue-500 hover:text-white" ></i>
+                              <i class="fa-solid fa-pen p-3 rounded-full bg-[#DDF4EB] text-green-500 hover:bg-green-500 hover:text-white"></i>
+                              <i class="fa-solid fa-trash p-3 rounded-full bg-[#FCE0DA] text-orange-500 hover:bg-orange-500 hover:text-white"></i>
+                          </td>
+                      </tr>
+                      <tr id="6th" >
+                          <td id="6" class="hidden min-[720px]:table-cell">6</td>
+                          <td class="flex items-center"><img src="../Assets/client/06.jpg" alt="" class="w-10 h-10 rounded-full"><span class="ps-2">Randall Case</span></td>
+                          <td class="hidden lg:table-cell">25</td>
+                          <td class="hidden lg:table-cell">Male</td>
+                          <td class="hidden min-[850px]:table-cell">1451-ABC Street, NY</td>
+                          <td class="hidden min-[670px]:table-cell">123-456-7890</td>
+                          <td class="hidden min-[540px]:table-cell">Orthopedic</td>
+                          <td class="hidden xl:table-cell">19th June 2023</td>
+                          <td class="hidden xl:table-cell">9:00AM</td>
+                          <td><span class="bg-[#ECFAF5] px-3 py-1 rounded-lg text-green-700 hidden min-[487px]:table-cell">Approved</span></td>
+                          <td>
+                              <i id="eye6" class="fa-solid fa-eye p-3 rounded-full bg-[#D4DFFB] text-blue-500 hover:bg-blue-500 hover:text-white" ></i>
+                              <i class="fa-solid fa-pen p-3 rounded-full bg-[#DDF4EB] text-green-500 hover:bg-green-500 hover:text-white"></i>
+                              <i class="fa-solid fa-trash p-3 rounded-full bg-[#FCE0DA] text-orange-500 hover:bg-orange-500 hover:text-white"></i>
+                          </td>
+                      </tr>
+                      <tr id="7th">
+                          <td id="7" class="hidden min-[720px]:table-cell">7</td>
+                          <td class="flex items-center"><img src="../Assets/client/07.jpg" alt="" class="w-10 h-10 rounded-full"><span class="ps-2">Jerry Morena</span></td>
+                          <td class="hidden lg:table-cell">25</td>
+                          <td class="hidden lg:table-cell">Male</td>
+                          <td class="hidden min-[850px]:table-cell">1451-ABC Street, NY</td>
+                          <td class="hidden min-[670px]:table-cell">123-456-7890</td>
+                          <td class="hidden min-[540px]:table-cell">Dentist</td>
+                          <td class="hidden xl:table-cell">20th June 2023</td>
+                          <td class="hidden xl:table-cell">9:00AM</td>
+                          <td><span class="bg-[#FEF6F0] px-3 py-1 rounded-lg text-[#d4a674] hidden min-[487px]:table-cell">Pending</span></td>
+                          <td>
+                              <i id="eye7" class="fa-solid fa-eye p-3 rounded-full bg-[#D4DFFB] text-blue-500 hover:bg-blue-500 hover:text-white" ></i>
+                              <i class="fa-solid fa-pen p-3 rounded-full bg-[#DDF4EB] text-green-500 hover:bg-green-500 hover:text-white"></i>
+                              <i class="fa-solid fa-trash p-3 rounded-full bg-[#FCE0DA] text-orange-500 hover:bg-orange-500 hover:text-white"></i>
+                          </td>
+                      </tr>
+                      <tr id="8th">
+                          <td id="8" class="hidden min-[720px]:table-cell">8</td>
+                          <td class="flex items-center"><img src="../Assets/client/08.jpg" alt="" class="w-10 h-10 rounded-full"><span class="ps-2">Lester McNally</span></td>
+                          <td class="hidden lg:table-cell">25</td>
+                          <td class="hidden lg:table-cell">Male</td>
+                          <td class="hidden min-[850px]:table-cell">1451-ABC Street, NY</td>
+                          <td class="hidden min-[670px]:table-cell">123-456-7890</td>
+                          <td class="hidden min-[540px]:table-cell">Gastrology</td>
+                          <td class="hidden xl:table-cell">31st Aug 2023</td>
+                          <td class="hidden xl:table-cell">1:30PM</td>
+                          <td><span class="bg-[#ECFAF5] px-3 py-1 rounded-lg text-green-700 hidden min-[487px]:table-cell">Approved</span></td>
+                          <td>
+                              <i id="eye8" class="fa-solid fa-eye p-3 rounded-full bg-[#D4DFFB] text-blue-500 hover:bg-blue-500 hover:text-white" ></i>
+                              <i class="fa-solid fa-pen p-3 rounded-full bg-[#DDF4EB] text-green-500 hover:bg-green-500 hover:text-white"></i>
+                              <i class="fa-solid fa-trash p-3 rounded-full bg-[#FCE0DA] text-orange-500 hover:bg-orange-500 hover:text-white"></i>
+                          </td>
+                      </tr>
+                      <tr id="9th">
+                          <td id="9" class="hidden min-[720px]:table-cell">9</td>
+                          <td class="flex items-center"><img src="../Assets/client/09.jpg" alt="" class="w-10 h-10 rounded-full"><span class="ps-2">Christopher Burrell</span></td>
+                          <td class="hidden lg:table-cell">28</td>
+                          <td class="hidden lg:table-cell">Female</td>
+                          <td class="hidden min-[850px]:table-cell">1451-ABC Street, NY</td>
+                          <td class="hidden min-[670px]:table-cell">123-456-7890</td>
+                          <td class="hidden min-[540px]:table-cell">Urology</td>
+                          <td class="hidden xl:table-cell">1st Sep 2023</td>
+                          <td class="hidden xl:table-cell">2:30PM</td>
+                          <td><span class="bg-[#ECFAF5] px-3 py-1 rounded-lg text-green-700 hidden min-[487px]:table-cell">Approved</span></td>
+                          <td>
+                              <i  id="eye9" class="fa-solid fa-eye p-3 rounded-full bg-[#D4DFFB] text-blue-500 hover:bg-blue-500 hover:text-white" ></i>
+                              <i class="fa-solid fa-pen p-3 rounded-full bg-[#DDF4EB] text-green-500 hover:bg-green-500 hover:text-white"></i>
+                              <i class="fa-solid fa-trash p-3 rounded-full bg-[#FCE0DA] text-orange-500 hover:bg-orange-500 hover:text-white"></i>
+                          </td>
+                      </tr>
+                      <tr id="10th">
+                          <td id="10" class="hidden min-[720px]:table-cell">10</td>
+                          <td class="flex items-center"><img src="../Assets/client/10.jpg" alt="" class="w-10 h-10 rounded-full"><span class="ps-2">Mary Skeens</span></td>
+                          <td class="hidden lg:table-cell">35</td>
+                          <td class="hidden lg:table-cell">Female</td>
+                          <td class="hidden min-[850px]:table-cell">1451-ABC Street, NY</td>
+                          <td class="hidden min-[670px]:table-cell">123-456-7890</td>
+                          <td class="hidden min-[540px]:table-cell">Neurology</td>
+                          <td class="hidden xl:table-cell">1st Sep 2023</td>
+                          <td class="hidden xl:table-cell">2:30PM</td>
+                          <td><span class="bg-[#FEF6F0] px-3 py-1 rounded-lg text-[#d4a674] hidden min-[487px]:table-cell">Pending</span></td>
+                          <td>
+                              <i id="eye10" class="fa-solid fa-eye p-3 rounded-full bg-[#D4DFFB] text-blue-500 hover:bg-blue-500 hover:text-white" ></i>
+                              <i class="fa-solid fa-pen p-3 rounded-full bg-[#DDF4EB] text-green-500 hover:bg-green-500 hover:text-white"></i>
+                              <i class="fa-solid fa-trash p-3 rounded-full bg-[#FCE0DA] text-orange-500 hover:bg-orange-500 hover:text-white"></i>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+              
+          </div>
+      </div>
+      <div id="detailback" class="hidden absolute top-0 left-0 w-full min-h-screen bg-gray-600 opacity-50"></div>
+          <div id="details" class="bg-white ">
+              <div id="detail1" class="hidden py-3 sm:px-4 px-7 w-[250px] min-[400px]:w-[300px] sm:w-[500px] h-[400px] min-[460px]:w-[400px] sm:h-88 absolute bg-gray-100 justify-center items-center inset-0 m-auto rounded-lg">
+                  <div id="close1" class="relative"><i class="fa-regular fa-circle-xmark absolute sm:top-2 sm:right-2 top-0 right-[-10px] sm:text-2xl text-lg hover:text-gray-700"></i></div>
+                  <div class="text-xl font-semibold">Profile</div><div class=" h-[1px] bg-[#E9ECEF] my-5"></div>
+                  <div class="sm:flex sm:items-center ">
+                      <img src="../Assets/client/01.jpg" alt="" class="w-16 h-16 rounded-full">
+                      <div class="ps-2 text-xl font-semibold">Howard Tanner</div>
+                  </div>
+                  <ul class=" sm:grid sm:grid-cols-2 sm:my-10 sm:gap-6 my-4 space-y-3">
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Age:</span>25 year old
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Gender:</span>Male
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Department:</span>Cardiology
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Date:</span>20th Dec 2020
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Time:</span>11:00 AM 
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Doctor:</span>Dr. Calvin Carlo
+                      </li>
+                          
+                  </ul>
+              </div>
+              <div id="detail2" class="hidden py-3 sm:px-4 px-7 w-[250px] min-[400px]:w-[300px] sm:w-[500px] h-[400px] min-[460px]:w-[400px] sm:h-88 absolute bg-gray-100 justify-center items-center inset-0 m-auto rounded-lg">
+
+                  <div id="close2" class="relative"><i class="fa-regular fa-circle-xmark absolute sm:top-2 sm:right-2 top-0 right-[-10px] sm:text-2xl text-lg hover:text-gray-700"></i></div>
+
+                  <div class="text-xl font-semibold">Profile</div><div class=" h-[1px] bg-[#E9ECEF] my-5"></div>
+                  <div class="flex items-center">
+                      <img src="../Assets/client/02.jpg" alt="" class="w-16 h-16 rounded-full">
+                      <div class="ps-2 text-xl font-semibold">Wendy Filson</div>
+                  </div>
+                  <ul class=" sm:grid sm:grid-cols-2 sm:my-10 sm:gap-6 my-4 space-y-3">
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Age:</span>28 year old
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Gender:</span>Female
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Department:</span>gynecology
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Date:</span>29th Nov 2023
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Time:</span>11:00 AM 
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Doctor:</span>Dr. Patrick Soon Shiong
+                      </li>
+                          
+                  </ul>
+              </div>
+              <div id="detail3" class="hidden py-3 sm:px-4 px-7 w-[250px] min-[400px]:w-[300px] sm:w-[500px] h-[400px] min-[460px]:w-[400px] sm:h-88 absolute bg-gray-100 justify-center items-center inset-0 m-auto rounded-lg">
+                  <div id="close3" class="relative"><i class="fa-regular fa-circle-xmark absolute sm:top-2 sm:right-2 top-0 right-[-10px] sm:text-2xl text-lg hover:text-gray-700"></i></div>
+                  <div class="text-xl font-semibold">Profile</div><div class=" h-[1px] bg-[#E9ECEF] my-5"></div>
+                  <div class="flex items-center">
+                      <img src="../Assets/client/03.jpg" alt="" class="w-16 h-16 rounded-full">
+                      <div class="ps-2 text-xl font-semibold">Faye Bridger</div>
+                  </div>
+                  <ul class=" sm:grid sm:grid-cols-2 sm:my-10 sm:gap-6 my-4 space-y-3">
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Age:</span>28 year old
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Gender:</span>Female
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Department:</span>Psychotherapy
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Date:</span>29th Dec 2023
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Time:</span>3:00PM
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Doctor:</span>Dr. Myles. B. Abbott, M.D
+                      </li>
+                          
+                  </ul>
+              </div>
+              <div id="detail4" class="hidden py-3 sm:px-4 px-7 w-[250px] min-[400px]:w-[300px] sm:w-[500px] h-[400px] min-[460px]:w-[400px] sm:h-88 absolute bg-gray-100 justify-center items-center inset-0 m-auto rounded-lg">
+                  <div id="close4" class="relative"><i class="fa-regular fa-circle-xmark absolute sm:top-2 sm:right-2 top-0 right-[-10px] sm:text-2xl text-lg hover:text-gray-700"></i></div>
+                  <div class="text-xl font-semibold">Profile</div><div class=" h-[1px] bg-[#E9ECEF] my-5"></div>
+                  <div class="flex items-center">
+                      <img src="../Assets/client/04.jpg" alt="" class="w-16 h-16 rounded-full">
+                      <div class="ps-2 text-xl font-semibold">Ronald Curtis</div>
+                  </div>
+                  <ul class=" sm:grid sm:grid-cols-2 sm:my-10 sm:gap-6 my-4 space-y-3">
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Age:</span>25 year old
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Gender:</span>Male
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Department:</span>Orthopedic
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Date:</span>13th March 2023
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Time:</span>1:00PM
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Doctor:</span>Dr. Naresh Trehan
+                      </li>
+                          
+                  </ul>
+              </div>
+              <div id="detail5" class="hidden py-3 sm:px-4 px-7 w-[250px] min-[400px]:w-[300px] sm:w-[500px] h-[400px] min-[460px]:w-[400px] sm:h-88 absolute bg-gray-100 justify-center items-center inset-0 m-auto rounded-lg">
+                  <div id="close5" class="relative"><i class="fa-regular fa-circle-xmark absolute sm:top-2 sm:right-2 top-0 right-[-10px] sm:text-2xl text-lg hover:text-gray-700"></i></div>
+                  <div class="text-xl font-semibold">Profile</div><div class=" h-[1px] bg-[#E9ECEF] my-5"></div>
+                  <div class="flex items-center">
+                      <img src="../Assets/client/05.jpg" alt="" class="w-16 h-16 rounded-full">
+                      <div class="ps-2 text-xl font-semibold">Melissa Hibner</div>
+                  </div>
+                  <ul class=" sm:grid sm:grid-cols-2 sm:my-10 sm:gap-6 my-4 space-y-3">
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Age:</span>28 year old
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Gender:</span>Female
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Department:</span>Dental
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Date:</span>5th May 2023
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Time:</span>10:00PM
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Doctor:</span>Dr. Corrie T.M Anderson, M.D.
+                      </li>
+                          
+                  </ul>
+              </div>
+              <div id="detail6" class="hidden py-3 sm:px-4 px-7 w-[250px] min-[400px]:w-[300px] sm:w-[500px] h-[400px] min-[460px]:w-[400px] sm:h-88 absolute bg-gray-100 justify-center items-center inset-0 m-auto rounded-lg">
+                  <div id="close6" class="relative"><i class="fa-regular fa-circle-xmark absolute sm:top-2 sm:right-2 top-0 right-[-10px] sm:text-2xl text-lg hover:text-gray-700"></i></div>
+                  <div class="text-xl font-semibold">Profile</div><div class=" h-[1px] bg-[#E9ECEF] my-5"></div>
+                  <div class="flex items-center">
+                      <img src="../Assets/client/06.jpg" alt="" class="w-16 h-16 rounded-full">
+                      <div class="ps-2 text-xl font-semibold">Randall Case</div>
+                  </div>
+                  <ul class=" sm:grid sm:grid-cols-2 sm:my-10 sm:gap-6 my-4 space-y-3">
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Age:</span>25 year old
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Gender:</span>Male
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Department:</span>Orthopedic
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Date:</span>19th June 2023
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Time:</span>9:00AM
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Doctor:</span>Dr. Pradeep Nambiar
+                      </li>
+                          
+                  </ul>
+              </div>
+              <div id="detail7" class="hidden py-3 sm:px-4 px-7 w-[250px] min-[400px]:w-[300px] sm:w-[500px] h-[400px] min-[460px]:w-[400px] sm:h-88 absolute bg-gray-100 justify-center items-center inset-0 m-auto rounded-lg">
+                  <div id="close7" class="relative"><i class="fa-regular fa-circle-xmark absolute sm:top-2 sm:right-2 top-0 right-[-10px] sm:text-2xl text-lg hover:text-gray-700"></i></div>
+                  <div class="text-xl font-semibold">Profile</div><div class=" h-[1px] bg-[#E9ECEF] my-5"></div>
+                  <div class="flex items-center">
+                      <img src="../Assets/client/07.jpg" alt="" class="w-16 h-16 rounded-full">
+                      <div class="ps-2 text-xl font-semibold">Jerry Morena</div>
+                  </div>
+                  <ul class=" sm:grid sm:grid-cols-2 sm:my-10 sm:gap-6 my-4 space-y-3">
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Age:</span>25 year old
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Gender:</span>Male
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Department:</span>Dentist
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Date:</span>20th June 2023
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Time:</span>9:00AM
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Doctor:</span>Dr. Bonnie Rae
+                      </li>
+                          
+                  </ul>
+              </div>
+              <div id="detail8" class="hidden py-3 sm:px-4 px-7 w-[250px] min-[400px]:w-[300px] sm:w-[500px] h-[400px] min-[460px]:w-[400px] sm:h-88 absolute bg-gray-100 justify-center items-center inset-0 m-auto rounded-lg">
+                  <div id="close8" class="relative"><i class="fa-regular fa-circle-xmark absolute top-2 right-2 text-2xl hover:text-gray-700"></i></div>
+                  <div class="text-xl font-semibold">Profile</div><div class=" h-[1px] bg-[#E9ECEF] my-5"></div>
+                  <div class="flex items-center">
+                      <img src="../Assets/client/08.jpg" alt="" class="w-16 h-16 rounded-full">
+                      <div class="ps-2 text-xl font-semibold">Lester McNally</div>
+                  </div>
+                  <ul class=" sm:grid sm:grid-cols-2 sm:my-10 sm:gap-6 my-4 space-y-3">
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Age:</span>25 year old
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Gender:</span>Male
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Department:</span>Gastrology
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Date:</span>31st Aug 2023
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Time:</span>1:30PM
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Doctor:</span>Dr. Elham Kateeb
+                      </li>
+                          
+                  </ul>
+              </div>
+              <div id="detail9" class="hidden py-3 sm:px-4 px-7 w-[250px] min-[400px]:w-[300px] sm:w-[500px] h-[400px] min-[460px]:w-[400px] sm:h-88 absolute bg-gray-100 justify-center items-center inset-0 m-auto rounded-lg">
+                  <div id="close9" class="relative"><i class="fa-regular fa-circle-xmark absolute sm:top-2 sm:right-2 top-0 right-[-10px] sm:text-2xl text-lg hover:text-gray-700"></i></div>
+                  <div class="text-xl font-semibold">Profile</div><div class=" h-[1px] bg-[#E9ECEF] my-5"></div>
+                  <div class="flex items-center">
+                      <img src="../Assets/client/09.jpg" alt="" class="w-16 h-16 rounded-full">
+                      <div class="ps-2 text-xl font-semibold">Christopher Burrell</div>
+                  </div>
+                  <ul class=" sm:grid sm:grid-cols-2 sm:my-10 sm:gap-6 my-4 space-y-3">
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Age:</span>25 year old
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Gender:</span>Female
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Department:</span>Urology
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Date:</span>31st Aug 2023
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Time:</span>2:30PM
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Doctor:</span>Dr. Francesco Mangan
+                      </li>
+                          
+                  </ul>
+              </div>
+              <div id="detail10" class="hidden py-3 sm:px-4 px-7 w-[250px] min-[400px]:w-[300px] sm:w-[500px] h-[400px] min-[460px]:w-[400px] sm:h-88 absolute bg-gray-100 justify-center items-center inset-0 m-auto rounded-lg">
+                  <div id="close10" class="relative"><i class="fa-regular fa-circle-xmark absolute sm:top-2 sm:right-2 top-0 right-[-10px] sm:text-2xl text-lg hover:text-gray-700"></i></div>
+                  <div class="text-xl font-semibold">Profile</div><div class=" h-[1px] bg-[#E9ECEF] my-5"></div>
+                  <div class="flex items-center">
+                      <img src="../Assets/client/09.jpg" alt="" class="w-16 h-16 rounded-full">
+                      <div class="ps-2 text-xl font-semibold">Mary Skeens</div>
+                  </div>
+                  <ul class=" sm:grid sm:grid-cols-2 sm:my-10 sm:gap-6 my-6 space-y-3">
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Age:</span>25 year old
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Gender:</span>Female
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Department:</span>Neurology
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Date:</span>31st Aug 2023
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Time:</span>2:30PM
+                      </li>
+                          
+                      <li class="flex">
+                          <span class="font-semibold mr-2">Doctor:</span>Dr. Herbert Birnbaum
+                      </li>
+                          
+                  </ul>
+              </div>
+          </div>
+      
+  </div>
+  </header>
+    <script src="../JS/patient_list.js"></script>
+     <script>
+        let eye1 = document.getElementById("eye1");
+        let detail1 = document.getElementById("detail1");
+        let detailback = document.getElementById("detailback");
+        // let scroll = document.getElementById("scroll");
+        eye1.addEventListener("click", ()=>{
+            detail1.style.display = "block";
+            detailback.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+        })
+        let closeinfo1 = document.getElementById("close1");
+        closeinfo1.addEventListener("click", ()=>{
+            detail1.style.display = "none";
+            detailback.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        })
+
+        let eye2 = document.getElementById("eye2");
+        let detail2 = document.getElementById("detail2");
+        eye2.addEventListener("click", ()=>{
+            detail2.style.display = "block";
+            detailback.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+
+
+        })
+        let closeinfo2 = document.getElementById("close2");
+        closeinfo2.addEventListener("click", ()=>{
+            detail2.style.display = "none";
+            detailback.style.display = 'none';
+            document.body.style.overflow = 'auto';
+
+        })
+
+        let eye3 = document.getElementById("eye3");
+        let detail3 = document.getElementById("detail3");
+        eye3.addEventListener("click", ()=>{
+            detailback.style.display = 'block';
+            detail3.style.display = "block";
+            document.body.style.overflow = 'hidden';
+
+        })
+        let closeinfo3 = document.getElementById("close3");
+        closeinfo3.addEventListener("click", ()=>{
+            detail3.style.display = "none";
+            detailback.style.display = 'none';
+            document.body.style.overflow = 'auto';
+
+        })
+
+        let eye4 = document.getElementById("eye4");
+        let detail4 = document.getElementById("detail4");
+        eye4.addEventListener("click", ()=>{
+            detailback.style.display = 'block';
+            detail4.style.display = "block";
+            document.body.style.overflow = 'hidden';
+
+        })
+        let closeinfo4 = document.getElementById("close4");
+        closeinfo4.addEventListener("click", ()=>{
+            detail4.style.display = "none";
+            detailback.style.display = 'none';
+            document.body.style.overflow = 'auto';
+
+
+        })
+        
+        let eye5 = document.getElementById("eye5");
+        let detail5 = document.getElementById("detail5");
+        eye5.addEventListener("click", ()=>{
+            detailback.style.display = 'block';
+            detail5.style.display = "block";
+            document.body.style.overflow = 'hidden';
+
+        })
+        let closeinfo5 = document.getElementById("close5");
+        closeinfo5.addEventListener("click", ()=>{
+            detail5.style.display = "none";
+            detailback.style.display = 'none';
+            document.body.style.overflow = 'auto';
+
+
+        })
+
+        let eye6 = document.getElementById("eye6");
+        let detail6 = document.getElementById("detail6");
+        eye6.addEventListener("click", ()=>{
+            detailback.style.display = 'block';
+            detail6.style.display = "block";
+            document.body.style.overflow = 'hidden';
+
+        })
+        let closeinfo6 = document.getElementById("close6");
+        closeinfo6.addEventListener("click", ()=>{
+            detail6.style.display = "none";
+            detailback.style.display = 'none';
+            document.body.style.overflow = 'auto';
+
+
+        })
+
+        let eye7 = document.getElementById("eye7");
+        let detail7 = document.getElementById("detail7");
+        eye7.addEventListener("click", ()=>{
+            detailback.style.display = 'block';
+            detail7.style.display = "block";
+            document.body.style.overflow = 'hidden';
+
+        })
+        let closeinfo7 = document.getElementById("close7");
+        closeinfo7.addEventListener("click", ()=>{
+            detail7.style.display = "none";
+            detailback.style.display = 'none';
+            document.body.style.overflow = 'auto';
+
+
+        })
+
+        let eye8 = document.getElementById("eye8");
+        let detail8 = document.getElementById("detail8");
+        eye8.addEventListener("click", ()=>{
+            detailback.style.display = 'block';
+            detail8.style.display = "block";
+            document.body.style.overflow = 'hidden';
+
+        })
+        let closeinfo8 = document.getElementById("close8");
+        closeinfo8.addEventListener("click", ()=>{
+            detail8.style.display = "none";
+            document.body.style.overflow = 'auto';
+
+        })
+
+        let eye9 = document.getElementById("eye9");
+        let detail9 = document.getElementById("detail9");
+        eye9.addEventListener("click", ()=>{
+            detailback.style.display = 'block';
+            detail9.style.display = "block";
+            document.body.style.overflow = 'hidden';
+
+        })
+        let closeinfo9 = document.getElementById("close9");
+        closeinfo9.addEventListener("click", ()=>{
+            detail9.style.display = "none";
+            detailback.style.display = 'none';
+            document.body.style.overflow = 'auto';
+
+
+        })
+
+        let eye10 = document.getElementById("eye10");
+        let detail10 = document.getElementById("detail10");
+        eye10.addEventListener("click", ()=>{
+            detailback.style.display = 'block';
+            detail10.style.display = "block";
+            document.body.style.overflow = 'hidden';
+
+        })
+        let closeinfo10 = document.getElementById("close10");
+        closeinfo10.addEventListener("click", ()=>{
+            detail10.style.display = "none";
+            detailback.style.display = 'none';
+            document.body.style.overflow = 'auto';
+
+
+        })
+
+
+        
+    </script>
+</body>
+
+</html>

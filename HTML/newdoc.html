@@ -1,0 +1,315 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../src/output.css">
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <!-- Include Font Awesome Pro for access to 'thin' and 'regular' styles -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <title>Doctris | Add Doctor</title>
+</head>
+
+<body class="font-sans">
+  <!-- Navbar -->
+  <nav class=" shadow-lg p-2 md:p-4 flex justify-between items-center">
+    <!-- Left Section -->
+    <div class="flex items-center space-x-2">
+      <!-- Parent div with relative positioning for the dropdown -->
+      <div class="relative">
+        <!-- Button to toggle the menu -->
+        <button aria-label="Open menu" onclick="toggleMenu('menuOptions')"
+          class="text-blue-500 border border-blue-100 text-sm md:text-xl bg-blue-50 rounded-full py-2 px-3">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <!-- Hamburger Menu Dropdown -->
+        <div id="menuOptions"
+          class="w-48 text-center border border-gray-200  absolute bg-white rounded-md hidden z-10 top-12 left-0 mt-2">
+          <ul>
+            <!-- Page 1 with anchor link -->
+            <li class="p-1">
+              <a href="doctors.html" class="text-blue-500 border-b border-gray-400 px-3 py-1.5 rounded-md block">Doctor
+                profile</a>
+            </li>
+            <!-- Option 2 with similar styling -->
+            <li class="p-1">
+              <a href="patient_list.html"
+                class="text-blue-500 border-b border-gray-400 px-3 py-1.5 rounded-md block">Patient list</a>
+              </a>
+            </li>
+             <!-- Option 3 with similar styling -->
+             <li class="p-1">
+              <a href="appointment.html" class="text-blue-500 border-b border-gray-400 px-3 py-1.5 rounded-md block">Appointments
+              </a>
+            </li>
+            <li class="p-1">
+              <a href="Index.html" class="text-blue-500 border-b border-gray-400 px-3 py-1.5 rounded-md block">Dashboard
+              </a>
+            </li>
+          </ul>
+        </div>
+
+
+      </div>
+
+      <!-- Search Bar -->
+      <div class="flex items-center border-2 border-gray-300 rounded-full px-2 py-1.5 md:px-4 md:py-2">
+        <input type="text" placeholder="Search Keywords..." class="bg-transparent focus:outline-none text-sm">
+        <i class="fas fa-search text-gray-500"></i>
+      </div>
+    </div>
+
+
+    <!-- Right Section -->
+    <div class="flex items-center space-x-2">
+      <!-- Language Selector -->
+      <div class="hidden md:block relative">
+        <button aria-label="Select Language" onclick="toggleMenu('languageMenu')"
+          class="text-blue-500 border border-blue-100 text-xl bg-blue-50 rounded-full py-2 px-3">
+          <i class="fas fa-globe"></i>
+        </button>
+        <!-- Language Dropdown -->
+        <div id="languageMenu" class="absolute bg-white shadow-md rounded-md p-4 mt-2 hidden">
+          <ul>
+            <li class="p-2 hover:bg-gray-100 cursor-pointer">English</li>
+            <li class="p-2 hover:bg-gray-100 cursor-pointer">Spanish</li>
+            <li class="p-2 hover:bg-gray-100 cursor-pointer">French</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Settings Icon -->
+      <div class="hidden md:block relative">
+        <button aria-label="Open Settings" onclick="toggleMenu('settingsMenu')"
+          class="text-blue-500 border border-blue-100 text-xl bg-blue-50 rounded-full py-2 px-3">
+          <i class="fa-solid fa-gear"></i>
+        </button>
+        <!-- Settings Dropdown -->
+        <div id="settingsMenu" class="absolute bg-white shadow-md rounded-md p-4 mt-2 hidden">
+          <ul>
+            <li class="p-2 hover:bg-gray-100 cursor-pointer">Option 1</li>
+            <li class="p-2 hover:bg-gray-100 cursor-pointer">Option 2</li>
+            <li class="p-2 hover:bg-gray-100 cursor-pointer">Option 3</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Message Icon -->
+      <div class="hidden md:block relative">
+        <button aria-label="View Messages"
+          class="text-blue-500 border border-blue-100 text-xl bg-blue-50 rounded-full py-2 px-3 relative">
+          <i class="fa-regular fa-envelope"></i>
+          <!-- Message Notification -->
+          <span class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full px-1">1</span>
+        </button>
+      </div>
+
+      <!-- Doctor Image -->
+      <div class="text-blue-500 border border-blue-100 bg-blue-50 rounded-full">
+        <img src="../Assets/jonny.png" alt="Doctor Profile Picture" class="w-8 md:w-11 h-8 md:h-11 rounded-full">
+      </div>
+    </div>
+  </nav>
+  <!-- Header -->
+  <header class="p-2 lg:p-10  bg-gray-100">
+    <!-- Main Container -->
+    <div class="container p-4">
+      <div class="flex flex-col lg:flex-row gap-6">
+
+        <!-- Left Section: Form -->
+        <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col lg:w-8/12 ">
+          <!-- Profile Picture Section -->
+          <div class="flex md:flex-row flex-col justify-between md:items-center">
+            <div class="w-16 h-16 bg-gray-200 rounded-full overflow-hidden mr-4">
+              <img id="profile-picture" src="../Assets/jonny.png" alt="Profile Picture" class="w-16 h-16">
+            </div>
+
+            <!-- Text Section -->
+            <div class="flex-1 my-4 md:my-0">
+              <h2 class="text-xl font-semibold mb-2">Upload your picture</h2>
+              <p class="text-xs text-gray-500 ">For best results, use an image at least 600px by 600px in either jpg or
+                .png format</p>
+            </div>
+
+            <!-- Buttons Section -->
+            <div class="my-4 md:my-0">
+              <!-- File Input Trigger -->
+              <input type="file" id="file-input" class="hidden" accept="image/png, image/jpeg">
+              <button class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+                onclick="document.getElementById('file-input').click()">
+                Upload
+              </button>
+              <button class="bg-blue-100 text-blue-700 py-2 px-4 rounded-md hover:bg-gray-400 ml-2"
+                onclick="document.getElementById('profile-picture').src = '../Assets/jonny.png'">
+                Remove
+              </button>
+            </div>
+          </div>
+
+          <!-- Form Section Below -->
+          <form class="space-y-4 mt-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">First Name</label>
+                <input type="text" placeholder="First Name :" class="mt-1 p-2 border border-gray-300 rounded w-full">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Last Name</label>
+                <input type="text" placeholder="Last Name :" class="mt-1 p-2 border border-gray-300 rounded w-full">
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Your Email</label>
+                <input type="email" placeholder="Your email :" class="mt-1 p-2 border border-gray-300 rounded w-full">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Phone No.</label>
+                <input type="text" placeholder="Phone no. :" class="mt-1 p-2 border border-gray-300 rounded w-full">
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Departments</label>
+                <select class="mt-1 p-2 border border-gray-300 rounded w-full">
+                  <option>Eye Care</option>
+                  <option>Gynecology</option>
+                  <option>Psychotherapy</option>
+                  <option>Orthopedic</option>
+                  <option>Dentist</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Gender</label>
+                <select class="mt-1 p-2 border border-gray-300 rounded w-full">
+                  <option>Male</option>
+                  <option>Female</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Instagram</label>
+                <input type="text" placeholder="Username" class="mt-1 p-2 border border-gray-300 rounded w-full">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Facebook</label>
+                <input type="text" placeholder="Username" class="mt-1 p-2 border border-gray-300 rounded w-full">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">LinkedIn</label>
+                <input type="text" placeholder="Username" class="mt-1 p-2 border border-gray-300 rounded w-full">
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Your Bio Here</label>
+              <textarea placeholder="Bio :" class="mt-1 p-2 border border-gray-300 rounded w-full"></textarea>
+            </div>
+            <div class="">
+              <button class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Add Doctor</button>
+              <button id="back" class="text-white py-2 px-4 rounded-md bg-blue-500 hover:bg-blue-600">
+                Back
+              </button>
+              
+            </div>
+          </form>
+        </div>
+
+        <!-- Right Section: Doctor List -->
+        <div class="bg-white p-6 rounded shadow-lg lg:w-4/12 mt-6 lg:mt-0  ">
+          <h2 class="text-lg lg:text-2xl font-bold mb-4">Doctors List</h2>
+          <div class="w-full h-0.5 bg-gray-300 m-3"></div>
+          <ul class="space-y-4">
+            <!-- Doctor List Item -->
+            <li class="flex items-center">
+              <img src="../Assets/doctor/02.jpg" alt="Dr. Calvin Carlo" class="md:w-28 md:h-28 w-16 h-16  rounded-full">
+              <div class="ml-4">
+                <h3 class="font-semibold text-gray-700">Dr. Calvin Carlo</h3>
+                <p class="text-sm text-gray-500">Eye Care</p>
+                <p class="text-sm text-gray-500">3 Years Experienced</p>
+              </div>
+            </li>
+            <li class="flex items-center">
+              <img src="../Assets/doctor/03.jpg" alt="Dr. Cristina Murphy"
+                class="md:w-28 md:h-28 w-16 h-16  rounded-full">
+              <div class="ml-4">
+                <h3 class="font-semibold text-gray-700">Dr. Cristina Murphy</h3>
+                <p class="text-sm text-gray-500">Gynecology</p>
+                <p class="text-sm text-gray-500">5 Years Experienced</p>
+              </div>
+            </li>
+            <li class="flex items-center">
+              <img src="../Assets/doctor/04.jpg" alt="Dr. Alia Reddy" class="md:w-28 md:h-28 w-16 h-16  rounded-full">
+              <div class="ml-4">
+                <h3 class="font-semibold text-gray-700">Dr. Alia Reddy</h3>
+                <p class="text-sm text-gray-500">Psychotherapy</p>
+                <p class="text-sm text-gray-500">4 Years Experienced</p>
+              </div>
+            </li>
+            <li class="flex items-center">
+              <img src="../Assets/doctor/05.jpg" alt="Dr. Toni Kovar" class="md:w-28 md:h-28 w-16 h-16  rounded-full">
+              <div class="ml-4">
+                <h3 class="font-semibold text-gray-700">Dr. Toni Kovar</h3>
+                <p class="text-sm text-gray-500">Orthopedic</p>
+                <p class="text-sm text-gray-500">6 Years Experienced</p>
+              </div>
+            </li>
+            <li class="flex items-center">
+              <img src="../Assets/doctor/06.jpg" alt="Dr. Jessica McFarlane"
+                class="md:w-28 md:h-28 w-16 h-16  rounded-full">
+              <div class="ml-4">
+                <h3 class="font-semibold text-gray-700">Dr. Jessica McFarlane</h3>
+                <p class="text-sm text-gray-500">Dentist</p>
+                <p class="text-sm text-gray-500">3 Years Experienced</p>
+              </div>
+            </li>
+          
+            
+            <li class="flex items-center">
+              <img src="../Assets/doctor/07.jpg" alt="Dr. Elsie Sherman"
+                class="md:w-28 md:h-28 w-16 h-16  rounded-full">
+              <div class="ml-4">
+                <h3 class="font-semibold text-gray-700">Dr. Elsie Sherman</h3>
+                <p class="text-sm text-gray-500">Dentist</p>
+                <p class="text-sm text-gray-500">3 Years Experienced</p>
+              </div>
+            </li>
+            <li class="flex items-center">
+              <img src="../Assets/doctor/08.jpg" alt="Dr. Bertha Magers"
+                class="md:w-28 md:h-28 w-16 h-16  rounded-full">
+              <div class="ml-4">
+                <h3 class="font-semibold text-gray-700">Dr. Bertha Magers</h3>
+                <p class="text-sm text-gray-500">Cardiologist</p>
+                <p class="text-sm text-gray-500">3 Years Experienced</p>
+              </div>
+            </li>
+            <li class="flex items-center">
+              <img src="../Assets/doctor/09.jpg" alt="Dr. Elsie Sherman"
+                class="md:w-28 md:h-28 w-16 h-16  rounded-full">
+              <div class="ml-4">
+                <h3 class="font-semibold text-gray-700">Dr. Elsie Sherman</h3>
+                <p class="text-sm text-gray-500">Orthopedic</p>
+                <p class="text-sm text-gray-500">3 Years Experienced</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+
+
+
+
+  <script src="../JS/newdoc.js"></script>
+  <script>
+  
+  </script>
+</body>
+
+</html>
