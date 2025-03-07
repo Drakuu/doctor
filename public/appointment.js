@@ -28,8 +28,8 @@ const appointments = [
         time: "11:00 AM",
         doctor: "Dr. Calvin Carlo",
         fees: "$50/Patient",
-        patientImage: "../public/assets/client/01.jpg",
-        doctorImage: "../public/assets/doctor/01.jpg"
+        patientImage: "./assets/client/01.jpg",
+        doctorImage: "./assets/doctor/01.jpg"
     },
     {
         id: 2,
@@ -42,8 +42,8 @@ const appointments = [
         time: "11:00 AM",
         doctor: "Dr. Cristino Murphy",
         fees: "$50/Patient",
-        patientImage: "../public/assets/client/02.jpg",
-        doctorImage: "../public/assets/doctor/02.jpg"
+        patientImage: "./assets/client/02.jpg",
+        doctorImage: "./assets/doctor/02.jpg"
     },
     {
         id: 3,
@@ -56,8 +56,8 @@ const appointments = [
         time: "2:00 PM",
         doctor: "Dr. Alia Reddy",
         fees: "$50/Patient",
-        patientImage: "../public/assets/client/03.jpg",
-        doctorImage: "../public/assets/doctor/03.jpg"
+        patientImage: "./assets/client/03.jpg",
+        doctorImage: "./assets/doctor/03.jpg"
     },
     {
         id: 4,
@@ -70,8 +70,8 @@ const appointments = [
         time: "9:00 AM",
         doctor: "Dr. Toni Kovar",
         fees: "$50/Patient",
-        patientImage: "../public/assets/client/04.jpg",
-        doctorImage: "../public/assets/doctor/04.jpg"
+        patientImage: "./assets/client/04.jpg",
+        doctorImage: "./assets/doctor/04.jpg"
     },
     {
         id: 5,
@@ -84,8 +84,8 @@ const appointments = [
         time: "11:00 AM",
         doctor: "Dr. Jessica McFarlane",
         fees: "$50/Patient",
-        patientImage: "../public/assets/client/05.jpg",
-        doctorImage: "../public/assets/doctor/05.jpg"
+        patientImage: "./assets/client/05.jpg",
+        doctorImage: "./assets/doctor/05.jpg"
     },
     {
         id: 6,
@@ -98,8 +98,8 @@ const appointments = [
         time: "10:00 AM",
         doctor: "Dr. Toni Kovar",
         fees: "$50/Patient",
-        patientImage: "../public/assets/client/06.jpg",
-        doctorImage: "../public/assets/doctor/06.jpg"
+        patientImage: "./assets/client/06.jpg",
+        doctorImage: "./assets/doctor/06.jpg"
     },
     {
         id: 7,
@@ -112,8 +112,8 @@ const appointments = [
         time: "3:00 PM",
         doctor: "Dr. Jessica McFarlane",
         fees: "$50/Patient",
-        patientImage: "../public/assets/client/07.jpg",
-        doctorImage: "../public/assets/doctor/07.jpg"
+        patientImage: "./assets/client/07.jpg",
+        doctorImage: "./assets/doctor/07.jpg"
     },
     {
         id: 8,
@@ -126,8 +126,8 @@ const appointments = [
         time: "12:00 PM",
         doctor: "Dr. Elsie Sherman",
         fees: "$50/Patient",
-        patientImage: "../public/assets/client/08.jpg",
-        doctorImage: "../public/assets/doctor/08.jpg"
+        patientImage: "./assets/client/08.jpg",
+        doctorImage: "./assets/doctor/08.jpg"
     },
     {
         id: 9,
@@ -140,8 +140,8 @@ const appointments = [
         time: "4:00 PM",
         doctor: "Dr. Bertha Magers",
         fees: "$50/Patient",
-        patientImage: "../public/assets/client/09.jpg",
-        doctorImage: "../public/assets/doctor/09.jpg"
+        patientImage: "./assets/client/09.jpg",
+        doctorImage: "./assets/doctor/09.jpg"
     },
     {
         id: 10,
@@ -154,8 +154,8 @@ const appointments = [
         time: "1:00 PM",
         doctor: "Dr. Johnathan Smith",
         fees: "$50/Patient",
-        patientImage: "../public/assets/client/10.jpg",
-        doctorImage: "../public/assets/doctor/10.jpg"
+        patientImage: "./assets/client/10.jpg",
+        doctorImage: "./assets/doctor/10.jpg"
     }
 ];
 
