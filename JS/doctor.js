@@ -15,16 +15,16 @@ window.addEventListener('click', function (event) {
 });
      // Define doctor data (expanded to 10 doctors)
      const doctors = [
-        { name: "Dr. Calvin Carlo", department: "Eye Care", image: "../Assets/doctor/01.jpg" },
-        { name: "Dr. Cristina Murphy", department: "Gynecology", image: "../Assets/doctor/02.jpg" },
-        { name: "Dr. Alia Reddy", department: "Psychotherapy", image: "../Assets/doctor/03.jpg" },
-        { name: "Dr. Toni Kovar", department: "Orthopedic", image: "../Assets/doctor/04.jpg" },
-        { name: "Dr. Jessica McFarlane", department: "Dentist", image: "../Assets/doctor/05.jpg" },
-        { name: "Dr. Alan Smith", department: "Cardiology", image: "../Assets/doctor/06.jpg" },
-        { name: "Dr. Maria Lopez", department: "Neurology", image: "../Assets/doctor/07.jpg" },
-        { name: "Dr. James Brown", department: "Pediatrics", image: "../Assets/doctor/08.jpg" },
-        { name: "Dr. Sarah White", department: "Dermatology", image: "../Assets/doctor/09.jpg" },
-        { name: "Dr. John Davis", department: "Orthopedic", image: "../Assets/doctor/10.jpg" }
+        { name: "Dr. Calvin Carlo", department: "Eye Care", image: "../public/assets/doctor/01.jpg" },
+        { name: "Dr. Cristina Murphy", department: "Gynecology", image: "../public/assets/doctor/02.jpg" },
+        { name: "Dr. Alia Reddy", department: "Psychotherapy", image: "../public/assets/doctor/03.jpg" },
+        { name: "Dr. Toni Kovar", department: "Orthopedic", image: "../public/assets/doctor/04.jpg" },
+        { name: "Dr. Jessica McFarlane", department: "Dentist", image: "../public/assets/doctor/05.jpg" },
+        { name: "Dr. Alan Smith", department: "Cardiology", image: "../public/assets/doctor/06.jpg" },
+        { name: "Dr. Maria Lopez", department: "Neurology", image: "../public/assets/doctor/07.jpg" },
+        { name: "Dr. James Brown", department: "Pediatrics", image: "../public/assets/doctor/08.jpg" },
+        { name: "Dr. Sarah White", department: "Dermatology", image: "../public/assets/doctor/09.jpg" },
+        { name: "Dr. John Davis", department: "Orthopedic", image: "../public/assets/doctor/10.jpg" }
       ];
   
      // Function to generate the card
