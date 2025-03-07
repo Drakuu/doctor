@@ -4,10 +4,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npx tailwindcss -i ./src/input.css -o ./public/output.css",
-    "dev": "tailwindcss -i ./src/input.css -o ./public/output.css --watch",
-    "postinstall": "npm run fix-permissions",
-  "fix-permissions": "chmod +x node_modules/.bin/tailwindcss"
-
+    "dev": "tailwindcss -i ./src/input.css -o ./public/output.css --watch"
   },
   "keywords": [],
   "author": "",
