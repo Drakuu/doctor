@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../public/output.css">
+  <link rel="stylesheet" href="./public/output.css">
   <!-- Include Font Awesome Pro for access to 'thin' and 'regular' styles -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -86,7 +86,7 @@
         <!-- Button to toggle the menu -->
         <button aria-label="Open menu" onclick="toggleMenu('menuOptions')"
           class="text-blue-500 border border-blue-100 text-sm md:text-xl bg-blue-50 rounded-full py-2 px-3">
-          <i class="fa-solid fa-bars"></i>
+          <i  onclick="toggleMenu('menuOptions')" class="fa-solid fa-bars"></i>
         </button>
 
         <!-- Hamburger Menu Dropdown -->
@@ -95,21 +95,21 @@
           <ul>
             <!-- Page 1 with anchor link -->
             <li class="p-1">
-              <a href="doctors.html"
+              <a href="./HTML/doctors.html"
                 class="text-blue-500 border-b border-gray-400 px-3 py-1.5 rounded-md block">Doctor profile</a>
             </li>
             <!-- Option 2 with similar styling -->
             <li class="p-1">
-              <a href="patient_list.html" class="text-blue-500 border-b border-gray-400 px-3 py-1.5 rounded-md block">Patient list</a>
+              <a href="./HTML/patient_list.html" class="text-blue-500 border-b border-gray-400 px-3 py-1.5 rounded-md block">Patient list</a>
               </a>
             </li>
             <!-- Option 3 with similar styling -->
             <li class="p-1">
-              <a href="appointment.html" class="text-blue-500 border-b border-gray-400 px-3 py-1.5 rounded-md block">Appointments
+              <a href="/HTML/appointment.html" class="text-blue-500 border-b border-gray-400 px-3 py-1.5 rounded-md block">Appointments
               </a>
             </li>
             <li class="p-1">
-              <a href="Index.html" class="text-blue-500 border-b border-gray-400 px-3 py-1.5 rounded-md block">Dashboard
+              <a href="index.html" class="text-blue-500 border-b border-gray-400 px-3 py-1.5 rounded-md block">Dashboard
               </a>
             </li>
           </ul>
@@ -172,7 +172,7 @@
 
       <!-- Doctor Image -->
       <div class="text-blue-500 border border-blue-100 bg-blue-50 rounded-full">
-        <img src="../Assets/jonny.png" alt="Doctor Profile Picture" class="w-8 md:w-11 h-8 md:h-11 rounded-full">
+        <img src="./Assets/jonny.png" alt="Doctor Profile Picture" class="w-8 md:w-11 h-8 md:h-11 rounded-full">
       </div>
     </div>
   </nav>
@@ -292,7 +292,7 @@
   <!-- FontAwesome Icons -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 
-  <script src="../JS/index.js"></script>
+  <script src="./JS/index.js"></script>
 
 
 </body>
