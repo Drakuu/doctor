@@ -22,5 +22,5 @@ window.addEventListener('click', function (event) {
   // Add a click event listener to the 'Back' button
   button.addEventListener('click', () => {
     console.log("here");
-    window.location.href = '../HTML/doctors.html'; // Make sure this path is correct
+    window.location.href = '.../doctors.html'; // Make sure this path is correct
   });

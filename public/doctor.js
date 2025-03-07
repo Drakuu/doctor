@@ -69,7 +69,7 @@ const button = document.getElementById('addDoctorBtn');
 // Add a click event listener to navigate to the new page
 button.addEventListener('click', () => {
   console.log("here");
-  window.location.href = '../HTML/newdoc.html'; // Replace 'add-doctor.html' with your target page URL
+  window.location.href = './newdoc.html'; // Replace 'add-doctor.html' with your target page URL
 });
 
       // Select the button
