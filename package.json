@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "tailwindcss -i ./src/input.css -o ./public/output.css",
-    "dev": "tailwindcss -i ./src/input.css -o ./public/output.css --watch"
+    "build": "npx tailwindcss -i ./src/input.css -o ./public/output.css",
+    "dev": "tailwindcss -i ./src/input.css -o ./public/output.css --watch",
+    "postinstall": "npm run fix-permissions",
+  "fix-permissions": "chmod +x node_modules/.bin/tailwindcss"
+
   },
   "keywords": [],
   "author": "",
